@@ -1,6 +1,7 @@
 # Global-Illumination
 
 ## Setting the Scene
+![](https://github.com/VanessaY/Global-Illumination/blob/master/Setting%20the%20Scene/Img.PNG)
 Everything is in XYZ order
 ### Plane
 * Scale: 1 x 1 x 2
