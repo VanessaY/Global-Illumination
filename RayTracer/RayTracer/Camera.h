@@ -12,7 +12,7 @@ public:
 	~Camera();
 
 	// Renders the world
-	// TODO: not sure how.
-	void render(World w);
+	// TODO: not sure how. Also it's void render(World).
+	void render();
 };
 

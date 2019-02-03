@@ -1,7 +1,5 @@
 #include "pch.h"
 #include "Ray.h"
-#include "Point.h"
-#include "Vector.h"
 
 Ray::Ray()
 {
