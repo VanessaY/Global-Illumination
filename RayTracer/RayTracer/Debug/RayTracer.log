@@ -1,2 +1,4 @@
-﻿  Ray.cpp
+﻿  Camera.cpp
+  RayTracer.cpp
+  Generating Code...
   RayTracer.vcxproj -> G:\CS710\Global-Illumination\RayTracer\Debug\RayTracer.exe

@@ -1,14 +1,14 @@
 #pragma once
-
+#include <SFML/Graphics/Color.hpp>
 // Materials have color
 // And other properties but that's later
 
 class Material
 {
 public:
-	double r, g, b;
+	sf::Uint8 r, g, b;
 	Material();
-	Material(double r, double g, double b);
+	Material(sf::Uint8 r, sf::Uint8 g, sf::Uint8 b);
 	~Material();
 };
 

@@ -26,7 +26,6 @@ public:
 	Vector& normalize();
 
 	// Transform the vector
-	// TODO not sure how.
-	void transform();
+	void transform(Eigen::Matrix4d transform);
 };
 

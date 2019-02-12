@@ -15,8 +15,8 @@ public:
 	// Checks the distance between this point and another point
 	double distance(const Point& other);
 
-	// Transforms the point. 
-	// TODO not sure how.
-	void transform();
+	// Transforms the point.
+	// Takes a 4x4 transformation matrix
+	void transform(Eigen::Matrix4d transform);
 };
 
