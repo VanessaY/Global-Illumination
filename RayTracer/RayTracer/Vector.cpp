@@ -24,16 +24,15 @@ Vector::~Vector()
 
 Vector Vector::cross(const Vector & other)
 {
-	double x = this->z * other.y - this->y * other.z;
-	double y = this->x * other.z - this->z * other.x;
-	double z = this->y * other.x - this->x * other.y;
+	double x = this->y * other.z - this->z * other.y;
+	double y = this->z * other.x - this->x * other.z;
+	double z = this->x * other.y - this->y * other.x;
 
 	return Vector(x, y, z).normalize();
 }
 
 double Vector::dot(const Vector & other)
 {
-	std::cout << this->x * other.x + this->y * other.y + this->z * other.z;
 	return this->x * other.x + this->y * other.y + this->z * other.z;
 }
 
@@ -56,9 +55,9 @@ void Vector::transform(Eigen::Matrix4d transform)
 {
 	Eigen::Vector4d vec(x, y, z, 1);
 	vec = transform * vec;
-	x = vec.x();
-	y = vec.y();
-	z = vec.z();
+	x = vec.x()/vec.w();
+	y = vec.y()/vec.w();
+	z = vec.z()/vec.w();
 }
 
 Vector operator+(const Vector & a, const Vector & b)

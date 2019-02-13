@@ -29,7 +29,7 @@ void Point::transform(Eigen::Matrix4d transform)
 {
 	Eigen::Vector4d pt(x, y, z, 1);
 	pt = transform * pt;
-	x = pt.x();
-	y = pt.y();
-	z = pt.z();
+	x = pt.x()/pt.w();
+	y = pt.y()/pt.w();
+	z = pt.z()/pt.w();
 }

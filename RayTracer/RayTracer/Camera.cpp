@@ -17,7 +17,10 @@ void Camera::render(World w, sf::Uint8 * pixels)
 {
 	Vector N = lookat.normalize();
 	Vector U = up.cross(N).normalize();
-	Vector V = U.cross(V).normalize();
+	Vector V = N.cross(U).normalize();
+	//std::cout << N.x << " " << N.y << " " << N.z << std::endl;
+	//std::cout << U.x << " " << U.y << " " << U.z << std::endl;
+	//std::cout << V.x << " " << V.y << " " << V.z << std::endl;
 
 	Vector negEye = Vector(-eyepoint.x, -eyepoint.y, -eyepoint.z);
 	Eigen::Matrix4d transform;
@@ -26,7 +29,7 @@ void Camera::render(World w, sf::Uint8 * pixels)
 				U.z, V.z, N.z, 0,
 				negEye.dot(U), negEye.dot(V), negEye.dot(N), 1;
 	
-	std::cout << transform;
+	std::cout << transform << std::endl;
 	std::vector<Object*> list = w.list;
 	for (std::vector<Object*>::iterator it = list.begin(); it != list.end(); ++it) {
 		(*it)->transform(transform);
