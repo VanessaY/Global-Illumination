@@ -50,9 +50,6 @@ double Sphere::intersect(Ray r)
 
 void Sphere::transform(Eigen::Matrix4d transform)
 {
-
 	camCenter = center;
-	std::cout << camCenter.x << " " << camCenter.y << " " << camCenter.z << std::endl;
 	camCenter.transform(transform);
-	std::cout << camCenter.x << " " << camCenter.y << " " << camCenter.z << std::endl;
 }

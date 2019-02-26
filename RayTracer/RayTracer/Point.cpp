@@ -28,8 +28,12 @@ double Point::distance(const Point& other)
 void Point::transform(Eigen::Matrix4d transform)
 {
 	Eigen::Vector4d pt(x, y, z, 1);
+
+	std::cout << x << " " << y << " " << z << " " << pt.w() << std::endl;
 	pt = transform * pt;
-	x = pt.x()/pt.w();
-	y = pt.y()/pt.w();
-	z = pt.z()/pt.w();
+	x = pt.x();
+	y = pt.y();
+	z = pt.z();
+	std::cout << x << " " << y << " " << z << " " << pt.w() << std::endl;
+
 }

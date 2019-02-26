@@ -13,46 +13,40 @@ Triangle::~Triangle()
 
 double Triangle::intersect(Ray r)
 {
-	//std::cout << "BEGIN" << std::endl;
-	//std::cout << camA.x << " " << camA.y << " " << camA.z << std::endl;
-	//std::cout << camB.x << " " << camB.y << " " << camB.z << std::endl;
-	//std::cout << camC.x << " " << camC.y << " " << camC.z << std::endl;
-	//
-	//std::cout << r.direction.x << " " << r.direction.y << " " << r.direction.z << std::endl;
-	//std::cout << r.origin.x << " " << r.origin.y << " " << r.origin.z << std::endl;
+	Eigen::Vector3d p0(camA.x, camA.y, camA.z);
+	Eigen::Vector3d p1(camB.x, camB.y, camB.z);
+	Eigen::Vector3d p2(camC.x, camC.y, camC.z);
 
-	Vector p0(camA.x, camA.y, camA.z);
-	Vector p1(camB.x, camB.y, camB.z);
-	Vector p2(camC.x, camC.y, camC.z);
+	Eigen::Vector3d O(r.origin.x, r.origin.y, r.origin.z);
+	Eigen::Vector3d D(r.direction.x, r.direction.y, r.direction.z);
 
-	Vector e1 = p1 - p0;
-	Vector e2 = p2 - p0;
+	Eigen::Vector3d e1 = p1 - p0;
+	Eigen::Vector3d e2 = p2 - p0;
 
-	Vector rayOrigin(r.origin.x, r.origin.y, r.origin.z);
-	Vector T = rayOrigin - p0;
-	Vector P = r.direction.cross(e2);
-	Vector Q = T.cross(e1);
+	Eigen::Vector3d T = O - p0;
+	
+	Eigen::Vector3d P = D.cross(e2);
 
-	if (P.dot(e1) == 0) {
+	Eigen::Vector3d Q = T.cross(e1);
+
+	float denom = P.dot(e1);
+	if (denom == 0) {
 		return 0;
 	}
 	else {
-		double coeff = 1 / P.dot(e1);
-
-		double W = coeff * Q.dot(e2);
-		double U = coeff * P.dot(T);
-		double V = coeff * Q.dot(r.direction);
-
-		if (W < 0) {
+		Eigen::Vector3d wuv = 1 / denom * Eigen::Vector3d(Q.dot(e2), P.dot(T), Q.dot(D));
+		//std::cout << -p0 << std::endl;
+		if (wuv.x() < 0) {
 			return 0;
 		}
-		else if ((U < 0) || (V < 0) || (U + V > 1)) {
+		else if (wuv.y() < 0 || wuv.z() < 0 || wuv.y() + wuv.z() > 1) {
 			return 0;
 		}
 		else {
-			return W;
+			return wuv.x();
 		}
 	}
+
 }
 
 
@@ -64,6 +58,6 @@ void Triangle::transform(Eigen::Matrix4d transform)
 	camB = B;
 	camB.transform(transform);
 
-	camB = B;
-	camB.transform(transform);
+	camC = C;
+	camC.transform(transform);
 }
