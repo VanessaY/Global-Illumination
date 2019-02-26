@@ -1,23 +1,21 @@
 # Global-Illumination
 
 ## Checkpoint 1 - Barebones
-![](https://github.com/VanessaY/Global-Illumination/blob/master/Images/Checkpt%201.PNG)
-### Issues
-I'm having quite a few problems.
-* Camera
-    * Rotating the camera is fine, but moving the camera is not. I've pulled the camera back a ways and altered the viewing angle and focus length so that the spheres (seen above) don't look janky. I fixed what I thought was the problem (transforming a point, a 4d vector with components XYZW, now normalizes so that the new X is X/W). This has not fixed it, though. Instead, it now disappears if it's moved away from the origin. I'm not sure why.
-    * I have band-aided this by simply moving the spheres in world space.
-    * Relevant files:
-         * Point.cpp/.h for point transformation
-         * Camera.cpp/h for camera view matrix initialization
-         * Raytracer.cpp for camera parameters
 
+Barebones
+
+![](https://github.com/VanessaY/Global-Illumination/blob/master/Images/Checkpt1Update.PNG)
+
+Side view!
+
+![](https://github.com/VanessaY/Global-Illumination/blob/master/Images/Checkpt1Sideview.PNG)
+### Issues
+~~I'm having quite a few problems.~~ I fixed all my problems! Writeup of problems is in past commits, I've cleared them and replaced them with how I fixed them. You can look at the history of this readme for my shame.
+* Camera
+    * I found out a few things.
+         * Even though Eigen is column major, you still enter it in row major order. I think it has worked. There's probably something screwy with camera, but I've not noticed it. Coordinates are weird, though. I'm probably just not visualizing them correctly, though. 
 * Triangle Intersection
-    * I have not been able to get the triangle intersection to work. I know that it's not the ray spawning portion, because spheres work just fine, including collisions. Thus, it has to be the intersection function. I am still kind of unsure as to how Barycentric coordinates work, so I have simply copied what was on the slides. To my knowledge, they are correct.
-    * As of right now, no triangle is showing up because the function is returning 0 for omega.
-    * Relevant files:
-         * Vector.cpp/.h for vector functions like add, subtract, dot, and cross
-         * Triangle.cpp/.h for triangle intersection.
+    * This was a dumb mistake. I simply didn't translate the third point. Oops.
 
 
 ## Setting the Scene
